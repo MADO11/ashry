@@ -20,5 +20,8 @@
   "homepage": "https://github.com/MADO11/ashry#readme",
   "devDependencies": {
     "bun": "^1.2.19"
+  },
+  "dependencies": {
+    "claude-code": "^0.0.2"
   }
 }
