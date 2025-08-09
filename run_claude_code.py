@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import os
 
 def read_list_from_file(filename):
     """Reads a comma-separated list from a file, handling UTF-8 encoding."""
@@ -10,19 +11,29 @@ def read_list_from_file(filename):
         print(f"Error: {filename} not found.")
         sys.exit(1)
 
+def find_package_path(package_name):
+    """Finds the path to an installed npm package."""
+    try:
+        # This is a simplification; a real implementation might need to search more robustly
+        path = os.path.join('node_modules', package_name)
+        if os.path.isdir(path):
+            return path
+    except Exception as e:
+        print(f"Error finding package {package_name}: {e}")
+    return None
 def main():
     """Constructs and executes the npx command with arguments from files."""
     agent_list = read_list_from_file('agents.txt')
     mcp_list = read_list_from_file('mcps.txt')
+    package_path = find_package_path('claude-code')
 
-    command = [
-        "./node_modules/.bin/bun", "run", "index.ts",
-        "--agent", agent_list,
-        "--mcp", mcp_list
-    ]
+    if not package_path:
+        print("Error: 'claude-code' package not found in node_modules.")
+        sys.exit(1)
 
+    command = ["../.bin/bun", "run", "index.ts", "--agent", agent_list, "--mcp", mcp_list]
     try:
-        result = subprocess.run(command, check=True, capture_output=True, text=True)
+        result = subprocess.run(command, check=True, capture_output=True, text=True, cwd=package_path)
         print("Command executed successfully.")
         print("stdout:", result.stdout)
         print("stderr:", result.stderr)
@@ -34,4 +45,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
