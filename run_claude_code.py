@@ -21,7 +21,17 @@ def main():
         "--mcp", mcp_list
     ]
 
-    subprocess.run(command)
+    try:
+        result = subprocess.run(command, check=True, capture_output=True, text=True)
+        print("Command executed successfully.")
+        print("stdout:", result.stdout)
+        print("stderr:", result.stderr)
+    except subprocess.CalledProcessError as e:
+        print(f"Command failed with exit code {e.returncode}")
+        print("stdout:", e.stdout)
+        print("stderr:", e.stderr)
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
+
