@@ -29,8 +29,8 @@ def find_package_path(package_name):
     return None
 def main():
     """Constructs and executes the npx command with arguments from files."""
-    agent_list = read_list_from_file('test_agents.txt')
-    mcp_list = read_list_from_file('test_mcps.txt')
+    agent_list = read_list_from_file('agents.txt')
+    mcp_list = read_list_from_file('mcps.txt')
     package_path = find_package_path('claude-code')
 
     if not package_path:
