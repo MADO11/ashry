@@ -16,7 +16,7 @@ def main():
     mcp_list = read_list_from_file('mcps.txt')
 
     command = [
-        "npx", "--package=claude-code@latest", "bun", "run", "index.ts",
+        "./node_modules/.bin/bun", "run", "index.ts",
         "--agent", agent_list,
         "--mcp", mcp_list
     ]
