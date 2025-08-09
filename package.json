@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/MADO11/ashry/issues"
   },
-  "homepage": "https://github.com/MADO11/ashry#readme"
+  "homepage": "https://github.com/MADO11/ashry#readme",
+  "devDependencies": {
+    "bun": "^1.2.19"
+  }
 }
