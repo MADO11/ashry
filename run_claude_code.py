@@ -1,14 +1,20 @@
 import subprocess
 import sys
 import os
+import re
 
 def read_list_from_file(filename):
     """Reads a comma-separated list from a file, handling UTF-8 encoding."""
     try:
         with open(filename, 'r', encoding='utf-8') as f:
-            return f.read().strip()
+            content = f.read().strip()
+            if not content:
+                return ""
+            # Filter out empty strings that may result from multiple commas
+            items = [item.strip() for item in content.split(',') if item.strip()]
+            return ",".join(items)
     except FileNotFoundError:
-        print(f"Error: {filename} not found.")
+        print(f"Warning: {filename} not found. Skipping this argument.")
         sys.exit(1)
 
 def find_package_path(package_name):
