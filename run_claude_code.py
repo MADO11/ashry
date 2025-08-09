@@ -16,9 +16,9 @@ def main():
     mcp_list = read_list_from_file('mcps.txt')
 
     command = [
-        "bun", "run", "index.ts",
-        "--agent", f"'{agent_list}'",
-        "--mcp", f"'{mcp_list}'"
+        "npx", "bun", "run", "index.ts",
+        "--agent", agent_list,
+        "--mcp", mcp_list
     ]
 
     try:
